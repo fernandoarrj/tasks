@@ -1,0 +1,15 @@
+html, body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: linear-gradient(
+		#9eefa6, #78c16e);
+}
+
+.separator {
+	border: 1px solid red;
+	min-height: 100vh;
+}
