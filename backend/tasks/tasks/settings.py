@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # libs install by me
     'allauth',
     'allauth.account',
+    'corsheaders',
     'django.contrib.sites',
     'rest_auth.registration',
     'rest_auth',
@@ -51,7 +52,10 @@ INSTALLED_APPS = [
     'app',
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -141,3 +145,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
+# CorsHeaders
+
+CORS_ORIGIN_ALLOW_ALL = True

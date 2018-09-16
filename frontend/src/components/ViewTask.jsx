@@ -22,13 +22,17 @@ class ViewTask extends React.Component {
 	
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				{this.state.tasks.map(function(e) {
 					return (
-						<p>e.name</p>
+						<div key={e.id} className="view-task">
+							<p>{e.name}</p>
+							<p>{e.dtcreate}</p>
+							<p>{e.dtdone}</p>
+						</div>
 					)
 				})}
-			</div>
+			</React.Fragment>
 		)
 	}
 }
