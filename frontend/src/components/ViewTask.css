@@ -1,11 +1,12 @@
 .view-task {
-	width: 300px;
-	hieght: 100px;
+	width: 200px;
+	hieght: 350px;
 	border: 1px solid #538c51;
 	background-color: #538c51;
 	margin-top: 15px;
 	text-align: center;
 	overflow: hidden;
+	padding: 30px;
 }
 
 .view-task p {
