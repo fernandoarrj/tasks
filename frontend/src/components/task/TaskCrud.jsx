@@ -52,11 +52,13 @@ class TaskCrud extends React.Component {
 					<td>{task.done}</td>
 					<td>{task.dtdone}</td>
 					<td>
-						<button className="btn btn-warning">
+						<button className="btn btn-warning"
+							onClick={() => this.load(task)}>
 							Change
 						</button>
 						
-						<button className="btn btn-danger ml-3">
+						<button className="btn btn-danger ml-3"
+							onClick={() => this.remove(task)}>
 							Delete
 						</button>
 					</td>
@@ -66,23 +68,36 @@ class TaskCrud extends React.Component {
 	}
 	
 	save(){
-		
+		const task = this.state.task
+		const method = task.id ? 'put' : 'post'
+		const url = task.id ? `${baseUrl}${task.id}` : baseUrl
+		axios[method](url, task)
+			.then(resp => { 
+				const list = this.getUpdateList(resp.data)
+				this.setState({ task: initialState.task, list})
+			})
 	}
 	
-	clear(){
-		
+	clear(e){
+		this.setState({ task: initialState.task })
 	}
 	
-	remove(){
-		
+	remove(task){
+		axios.delete(`${baseUrl}${task.id}`)
+			.then(resp => {
+				const list = this.getUpdateList(task, false)
+				this.setState({ list })
+			})
 	}
 	
-	load(){
-		
+	load(task){
+		this.setState({ task })
 	}
 	
-	getUpdateList(){
-		
+	getUpdateList(task, add=true){
+		const list = this.state.list(t => t.id !== t.id)
+		if (add) list.unshift(task)
+		return list
 	}
 	
 	renderForm() {
@@ -90,42 +105,55 @@ class TaskCrud extends React.Component {
 			
 			<div className="form">
 				<div className="row">
-					<div className="col-12 col-md-6">
-						<div className="form-group">
-							<label>Task</label>
-							<input type="text" className="form-control"
+					<div className="col-12">
+						<div className="form-group row">
+							<label className="col-2 col-form-label" htmlFor="name">Task</label>
+							<div className="col-10">
+								<input type="text" className="form-control"
 								name="name"
 								value={this.state.task.name}
 								onChange={e => this.updateField(e)}
-								placeholder="Task" />
+								placeholder="Task" 
+								id="name"/>
+							</div>
+							
 						</div>
 						
-						<div className="form-group">
-							<label>Done</label>
-							<input type="checkbox" className="form-check-input"
+						<div className="form-group row">
+							<label className="col-2 col-form-label" htmlFor="done">Done</label>
+							<div className="col-10">
+								<input type="checkbox" className="form-check"
 								name="done"
 								value={this.state.task.done}
 								onChange={e => this.updateField(e)}
-								placeholder="Done" />
+								placeholder="Done" 
+								id="done"/>
+							</div>
+							
 						</div>
 						
-						<div className="form-group">
-							<label>Dt. Done</label>
-							<input type="date" className="form-control"
+						<div className="form-group row">
+							<label className="col-2 col-form-label" htmlFor="dtdone">Dt. Done</label>
+							<div className="col-10">
+								<input type="date" className="form-control"
 								name="dtdone"
 								value={this.state.task.dtdone}
-								onChange={e => this.updateField(e)} />
+								onChange={e => this.updateField(e)}
+								id="dtdone"/>
+							</div>
 						</div>
 					</div>
 				</div>
 				
 				<div className="row">
 					<div className="col-12 d-flex justify-content-end">
-						<button className="btn btn-primary">
+						<button className="btn btn-primary"
+							onClick={e => this.save(e)}>
 							Salvar
 						</button>
 						
-						<button className="btn btn-secondary ml-2">
+						<button className="btn btn-secondary ml-2"
+							onClick={e => this.clear(e)}>
 							Cancelar
 						</button>
 					</div>
