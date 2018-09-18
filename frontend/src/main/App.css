@@ -1,11 +1,49 @@
-html, body {
-	width: 100%;
-	margin: 0;
-	padding: 0;
+:root {
+	--bg-blue-dark : #0570eb;
+	--bg-blue-light: #5ba7ff;
+	
+	--aside-width: 100px;
+	
+	--footer-height: 45px;
+	--logo-height: 50px;
 }
 
-body {
+* {
+	box-sizing: border-box;
+	font-family: 'Montserrat', 'sans-serif';
+}
+
+/* Layout em Grid */
+
+.app {
+	margin: 0px;
+	display: grid;
+	grid-template-columns: var(--aside-width) 1fr;
+	grid-template-rows:
+		var(--logo-height)
+		1fr
+		var(--footer-height);
+	grid-template-areas:
+		"logo content"
+		"menu content"
+		"menu footer";
+	height: 100vh;
 	background: linear-gradient(
-		#9eefa6, #78c16e);
+		var(--bg-blue-dark),var(--bg-blue-light));
 }
 
+aside.logo {
+	grid-area: logo;
+}
+
+aside.menu-area {
+	grid-area: menu;
+}
+
+main.content {
+	grid-area: content;
+}
+
+footer.footer {
+	grid-area: footer;
+}
