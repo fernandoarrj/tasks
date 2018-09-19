@@ -6,7 +6,7 @@ import './TaskCrud.css'
 const baseUrl = 'http://127.0.0.1:8000/api/'
 
 const initialState = {
-	task : {name: '', done: false, dtdone: new Date()},
+	task : {name: '', done: false, dtdone: ''},
 	list : []
 }
 
@@ -70,10 +70,15 @@ class TaskCrud extends React.Component {
 	save(){
 		const task = this.state.task
 		const method = task.id ? 'put' : 'post'
-		const url = task.id ? `${baseUrl}${task.id}` : baseUrl
+		const url = task.id ? `${baseUrl}${task.id}/` : baseUrl
+		
+		if (task.dtdone === "") {task.dtdone = null}
+		
+		
 		axios[method](url, task)
 			.then(resp => { 
 				const list = this.getUpdateList(resp.data)
+				console.log(resp.data)
 				this.setState({ task: initialState.task, list})
 			})
 	}
@@ -83,19 +88,21 @@ class TaskCrud extends React.Component {
 	}
 	
 	remove(task){
-		axios.delete(`${baseUrl}${task.id}`)
+		axios.delete(`${baseUrl}${task.id}/`)
 			.then(resp => {
 				const list = this.getUpdateList(task, false)
 				this.setState({ list })
+				this.clear()
 			})
 	}
 	
 	load(task){
+		if (task.dtdone === null) { task.dtdone = ""}
 		this.setState({ task })
 	}
 	
-	getUpdateList(task, add=true){
-		const list = this.state.list(t => t.id !== t.id)
+	getUpdateList(task, add = true){
+		const list = this.state.list.filter(t => t.id !== task.id)
 		if (add) list.unshift(task)
 		return list
 	}

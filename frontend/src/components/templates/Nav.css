@@ -1,3 +1,6 @@
 aside.menu-area {
 	background: #13294b;
+	position: fixed;
+	min-height: 100vh;
+	min-width: var(--aside-width);
 }

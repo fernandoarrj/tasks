@@ -10,7 +10,6 @@ import Main from '../components/templates/Main'
 
 export default props => 
 	<div className="app">
-		<Logo />
 		<Nav />
 		<Main />
 		<Footer />

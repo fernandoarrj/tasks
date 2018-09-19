@@ -24,10 +24,10 @@
 		1fr
 		var(--footer-height);
 	grid-template-areas:
-		"logo content"
+		"menu content"
 		"menu content"
 		"menu footer";
-	height: 100vh;
+	min-height: 100vh;
 	background: linear-gradient(
 		var(--bg-blue-dark),var(--bg-blue-light));
 }

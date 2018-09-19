@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'corsheaders',
     'django.contrib.sites',
-    'rest_auth.registration',
-    'rest_auth',
+    #'rest_auth.registration',
+    #'rest_auth',
     'rest_framework',
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
     
     # apps
     'app',
@@ -56,10 +56,11 @@ SITE_ID = 1
 
 MIDDLEWARE = [
 	'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
