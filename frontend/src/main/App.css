@@ -32,6 +32,16 @@
 		var(--bg-blue-dark),var(--bg-blue-light));
 }
 
+@media(max-width: 768px) {
+	.app {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"menu"
+			"content"
+			"footer"
+	}
+}
+
 aside.logo {
 	grid-area: logo;
 }

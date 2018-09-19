@@ -4,3 +4,11 @@ aside.menu-area {
 	min-height: 100vh;
 	min-width: var(--aside-width);
 }
+
+@media(max-width: 768px) {
+	aside.menu-area {
+		display: inline;
+		position: relative;
+		min-height: 50px;
+	}
+}

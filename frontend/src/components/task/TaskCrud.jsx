@@ -22,7 +22,8 @@ class TaskCrud extends React.Component {
 	
 	updateField(e) {
 		const task = { ...this.state.task }
-		task[e.target.name] = e.target.value
+		if (e.target.name != 'done') {task[e.target.name] = e.target.value}
+		else {task[e.target.name] = e.target.checked }
 		this.setState({ task })
 	}
 	
@@ -44,12 +45,16 @@ class TaskCrud extends React.Component {
 		)
 	}
 	
+	returnTrueOrFalse(done) {
+		return done ? 'Yeah' : 'Not'
+	}
+	
 	renderRows() {
 		return this.state.list.map(task => {
 			return (
 				<tr key={task.id}>
 					<td>{task.name}</td>
-					<td>{task.done}</td>
+					<td>{this.returnTrueOrFalse(task.done)}</td>
 					<td>{task.dtdone}</td>
 					<td>
 						<button className="btn btn-warning"
@@ -97,7 +102,7 @@ class TaskCrud extends React.Component {
 	}
 	
 	load(task){
-		if (task.dtdone === null) { task.dtdone = ""}
+		if (task.dtdone === null) { task.dtdone = "" }
 		this.setState({ task })
 	}
 	
